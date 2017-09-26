@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="slip" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3636363636363662"/>
+	<property name="ireport.x" value="172"/>
+	<property name="ireport.y" value="113"/>
+	<parameter name="no_slip" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{slipID}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT *, SUBSTRING(tanggal, 1, 11) FROM slip s, penerima p, penyetor py, mata_uang m, jenis_setoran st,jenis_rek j, info_penyetor ip
+WHERE s.penerimaID=p.penerimaID AND s.penyetorID=py.penyetorID AND s.jenisID=j.jenisID
+AND s.mata_uangID=m.mata_uangID AND s.setoranID=st.setoranID AND py.info_penyetorID=ip.info_penyetorID AND slipID=$P{no_slip}]]>
+	</queryString>
+	<field name="slipID" class="java.lang.Integer"/>
+	<field name="penerimaID" class="java.lang.String"/>
+	<field name="penyetorID" class="java.lang.String"/>
+	<field name="mata_uangID" class="java.lang.String"/>
+	<field name="jenisID" class="java.lang.String"/>
+	<field name="setoranID" class="java.lang.String"/>
+	<field name="jumlah_rupiah" class="java.lang.String"/>
+	<field name="total" class="java.lang.String"/>
+	<field name="terbilang" class="java.lang.String"/>
+	<field name="nama_penerima" class="java.lang.String"/>
+	<field name="alamat_penerima" class="java.lang.String"/>
+	<field name="telpon_penerima" class="java.lang.String"/>
+	<field name="no_rek" class="java.lang.String"/>
+	<field name="info_penyetorID" class="java.lang.Integer"/>
+	<field name="nama" class="java.lang.String"/>
+	<field name="alamat" class="java.lang.String"/>
+	<field name="telpon" class="java.lang.String"/>
+	<field name="info" class="java.lang.String"/>
+	<field name="jenis_uang" class="java.lang.String"/>
+	<field name="tanda_uang" class="java.lang.String"/>
+	<field name="jenis_setor" class="java.lang.String"/>
+	<field name="tanda_setoran" class="java.lang.String"/>
+	<field name="jenis_rek" class="java.lang.String"/>
+	<field name="tanda_tanda_jenis_rek" class="java.lang.String"/>
+	<field name="jenis_info" class="java.lang.String"/>
+	<field name="tanda_info" class="java.lang.String"/>
+	<field name="SUBSTRING(tanggal, 1, 11)" class="java.lang.String"/>
+	<field name="tanggal" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField pattern="dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="482" y="38" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="52" width="100" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tanda_uang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="63" width="100" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tanda_uang}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="332" y="10" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{jenis_setor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="-7" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{no_rek}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="510" y="10" width="74" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{jumlah_rupiah}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="158" y="-33" width="157" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nama_penerima}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="159" y="36" width="72" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tanda_setoran}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="511" y="48" width="60" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="159" y="-54" width="188" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="159" y="-45" width="127" height="16"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{alamat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="-35" width="100" height="16"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telpon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="244" y="-26" width="100" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{info}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="6" width="203" height="35"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{terbilang}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

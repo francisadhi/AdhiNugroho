@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" printOrder="Horizontal" pageWidth="285" pageHeight="285" columnWidth="285" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="52487aba-c4ef-4905-b370-4dfc671d2b4d">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="74"/>
+	<parameter name="AplogServiceId" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT * 
+FROM aplogServices
+WHERE
+     aplogServicesId = $P{AplogServiceId}]]>
+	</queryString>
+	<field name="aplogServicesId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="aplogServicesNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="aplogServicesDate" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="aplogDestId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="aplogServicesTypeId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="aplogServicesTypePrice" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="aplogUserId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="285" splitType="Stretch">
+			<textField>
+				<reportElement x="14" y="72" width="283" height="20" uuid="f4f269b4-083c-4c9f-9774-21415f71ac8f"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date : " + new SimpleDateFormat("dd MMMMM yyyy").format($F{aplogServicesDate})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="52" width="283" height="20" uuid="74698363-e1f8-4b0f-9369-f24677d549a2"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["No. KWS : " + $F{aplogServicesNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="191" width="283" height="29" uuid="4525640f-de68-44d6-a580-f736b8158f5d"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="Arial Black" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[WRAPPING]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="252" width="283" height="20" uuid="ffd2d73e-de01-408a-86df-348333432e54"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(Include PPN)]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="14" y="232" width="283" height="20" uuid="3dccc918-cb73-4a1f-97b5-6d9b854bf7f6"/>
+				<textElement textAlignment="Center" rotation="None">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("Rp #,###").format($F{aplogServicesTypePrice}+($F{aplogServicesTypePrice}*(10/100)))]]></textFieldExpression>
+			</textField>
+			<elementGroup>
+				<image scaleImage="RetainShape" hAlign="Left" vAlign="Middle">
+					<reportElement x="-14" y="103" width="134" height="74" uuid="74bfcfa2-bc14-47a7-b743-03e9ac6328d6"/>
+					<imageExpression><![CDATA[new com.onbarcode.barcode.jasper.JasperRenderer( com.onbarcode.barcode.jasper.BarcodeGenerator.draw(2, $F{aplogServicesNo} + "", "", "X=2&Y=60"))]]></imageExpression>
+				</image>
+			</elementGroup>
+		</band>
+	</title>
+</jasperReport>

@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="surat" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb56f32e-fc53-4e80-9cff-970cacf7b4af">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="orderId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     torder.`orderId` AS torder_orderId,
+     torder.`orderNo` AS torder_orderNo,
+     torder.`orderTanggal` AS torder_orderTanggal,
+     torder.`orderNoKartu` AS torder_orderNoKartu,
+     torder.`orderHb` AS torder_orderHb,
+     torder.`orderDiagnosa` AS torder_orderDiagnosa,
+     torder.`orderKelas` AS torder_orderKelas,
+     torder.`orderBangsal` AS torder_orderBangsal,
+     torder.`orderTanggalMasuk` AS torder_orderTanggalMasuk,
+     torder.`orderTanggalDigunakan` AS torder_orderTanggalDigunakan,
+     torder.`orderJmlMinta` AS torder_orderJmlMinta,
+     torder.`orderJenisPermintaan` AS torder_orderJenisPermintaan,
+     torder.`staffHospitalId` AS torder_staffHospitalId,
+     torder.`comJaminanId` AS torder_comJaminanId,
+     torder.`comKomponenDarahId` AS torder_comKomponenDarahId,
+     torder.`patientId` AS torder_patientId,
+     torder.`docterId` AS torder_docterId,
+     torder.`hospitalId` AS torder_hospitalId,
+     patient.`patientName` AS torder_patientName,
+     docter.`docterName` AS torder_docterName
+FROM
+     `torder` torder inner join `patient` patient on torder.patientId = patient.patientId
+inner join `docter` docter on torder.docterId=docter.docterId
+WHERE
+     torder.orderId = $P{orderId}]]>
+	</queryString>
+	<field name="torder_orderId" class="java.lang.Integer"/>
+	<field name="torder_orderNo" class="java.lang.String"/>
+	<field name="torder_orderTanggal" class="java.sql.Date"/>
+	<field name="torder_orderNoKartu" class="java.lang.String"/>
+	<field name="torder_orderHb" class="java.lang.String"/>
+	<field name="torder_orderDiagnosa" class="java.lang.String"/>
+	<field name="torder_orderKelas" class="java.lang.String"/>
+	<field name="torder_orderBangsal" class="java.lang.String"/>
+	<field name="torder_orderTanggalMasuk" class="java.sql.Date"/>
+	<field name="torder_orderTanggalDigunakan" class="java.sql.Date"/>
+	<field name="torder_orderJmlMinta" class="java.lang.Integer"/>
+	<field name="torder_orderJenisPermintaan" class="java.lang.String"/>
+	<field name="torder_staffHospitalId" class="java.lang.Integer"/>
+	<field name="torder_comJaminanId" class="java.lang.Integer"/>
+	<field name="torder_comKomponenDarahId" class="java.lang.Integer"/>
+	<field name="torder_patientId" class="java.lang.Integer"/>
+	<field name="torder_docterId" class="java.lang.Integer"/>
+	<field name="torder_hospitalId" class="java.lang.Integer"/>
+	<field name="torder_patientName" class="java.lang.String"/>
+	<field name="torder_docterName" class="java.lang.String"/>
+	<group name="torder_orderId">
+		<groupExpression><![CDATA[$F{torder_orderId}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<image hAlign="Center">
+				<reportElement x="3" y="0" width="552" height="60" uuid="c58735f6-d277-4d8c-bee3-1029a6dbff07"/>
+				<imageExpression><![CDATA["D:\\Project\\PmiTemanggung\\src\\java\\report\\header.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="15" width="537" height="20" uuid="d1658ed5-68e2-4702-a42a-fab7372dc1df"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="14"/>
+				</textElement>
+				<text><![CDATA[Surat Permintaan Darah]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<line>
+				<reportElement x="7" y="-34" width="537" height="1" uuid="d7a15cee-1bcf-4219-81b1-d5af94b12411"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="7" y="-30" width="537" height="1" uuid="9df473c4-7387-4ab2-a650-e1e4ca2958b7"/>
+			</line>
+			<line>
+				<reportElement x="183" y="1" width="186" height="1" uuid="86aee47e-0447-4d6f-9412-5038fb67d728"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="545" splitType="Stretch">
+			<textField>
+				<reportElement x="135" y="2" width="182" height="20" uuid="4574c908-71db-419c-bb66-a8caada1c86d"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderNo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="135" y="73" width="182" height="20" uuid="8af042e8-06c5-460a-98ef-6e7185c3ed10"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderTanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="97" width="182" height="20" uuid="13c8d9bb-da7d-409d-93d6-8f693b854423"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderNoKartu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="120" width="182" height="20" uuid="60498791-6994-4822-ae5a-942ba6b8e4dc"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderHb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="144" width="182" height="20" uuid="9292a85e-0489-474c-ad81-c9699353dee3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderDiagnosa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="2" width="132" height="20" uuid="4272463e-d03a-4f06-b8fd-a6e003a28c85"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[No. Order 		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="73" width="132" height="20" uuid="494c6878-efd1-448e-82a5-eb0a12a4b7ea"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Tanggal Order 		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="97" width="132" height="20" uuid="698a1673-9742-44df-ac0f-82cc26a8a8b0"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[No Kartu		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="120" width="131" height="20" uuid="693b9185-0d49-4225-bb9d-49019065c9ba"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[HB			:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="144" width="131" height="20" uuid="af2fb520-d987-489a-b959-26df50f524f7"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Diagnosa		:]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="136" y="166" width="182" height="20" uuid="c121a395-90c6-4a00-9cce-56e57914c817"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderTanggalMasuk}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="166" width="131" height="20" uuid="0f8d6d17-e9ea-446d-9e45-97e00ca97928"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Tanggal Masuk		:]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="136" y="188" width="182" height="20" uuid="81367582-78b5-470e-8abc-73f3de56324f"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderTanggalDigunakan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="188" width="131" height="20" uuid="4ca4c1c6-d3e0-4452-817b-813e7479081d"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Tanggal Digunakan	:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="136" y="210" width="182" height="20" uuid="bb01a8e9-8424-4e3b-b259-ff877f481f39"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderJmlMinta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="210" width="131" height="20" uuid="b90628c3-34fe-419f-aab8-b85fbf5f323c"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Jumlah yang diminta	:]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="135" y="22" width="182" height="20" uuid="59cee3a0-38b3-4868-bff6-483255152b99"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_docterName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="22" width="132" height="20" uuid="b76b2923-0c21-4dc5-9bf2-9423294293eb"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Dokter yang meminta 	:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="42" width="131" height="20" uuid="857443b4-5484-46f6-839a-bca3d7fe0d78"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Nama Penderita 	:]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="135" y="42" width="182" height="20" uuid="8c7e2b27-3519-4ffe-931f-faaec25f46b7"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_patientName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="326" y="2" width="64" height="20" uuid="9cdb4544-3cd9-40fe-b504-9f4eea999669"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Ruang	:]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="399" y="2" width="182" height="20" uuid="5f920528-5845-4257-b793-ab7cdc6b119b"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderBangsal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="326" y="22" width="64" height="20" uuid="fe998776-8a99-4cdb-869f-7b9a17b37a90"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Kelas	:	:]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="399" y="22" width="182" height="20" uuid="0b1bbd7a-c1db-4496-91a7-6709aafb4fc9"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderKelas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="326" y="42" width="64" height="20" uuid="95d00a66-d528-4329-b7da-63d39a82dd21"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Umur	:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="234" width="72" height="20" uuid="219995a4-45c6-4474-bda6-376d75e4575b"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Temanggung,]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="326" y="310" width="182" height="20" uuid="48c1188a-179b-4dd2-8009-17ade73cad2d"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_docterName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="387" y="234" width="182" height="20" uuid="7a6abc3c-c692-4ed0-a4e6-73fda33cee35"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderTanggalDigunakan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="326" y="254" width="182" height="20" uuid="b8fddf18-e548-4e8a-ad26-f31f1a4cb40c"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Dokter yang meminta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="396" width="182" height="20" uuid="95e945d8-3c3d-47f1-a88b-b764dd969a67"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[No Kantong]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="416" width="182" height="20" uuid="9d11cf98-eb0c-488e-8885-b9f0730427f2"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[.....................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="436" width="182" height="20" uuid="b11c2ab3-a01f-4442-babc-d2081accf065"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[.....................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="456" width="182" height="20" uuid="7d902766-4882-4345-b225-1bc64e1592c1"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[.....................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="476" width="182" height="20" uuid="dc8dd63b-280f-4c7b-81f0-acc4df9f2fb6"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[.....................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="254" width="182" height="20" uuid="962315bd-6a9e-4ed6-989b-bd36f7ad5d58"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Telah diterima :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="274" width="85" height="20" uuid="dbdca948-c87e-4d73-a6c9-85745322f68b"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Jumlah		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="294" width="85" height="20" uuid="3baa1f7d-dc29-495c-b964-e877575a8206"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Gol Darah 	:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="94" y="294" width="182" height="20" uuid="880ba42b-aae6-4c3f-bf7a-4ef8b8cbdc9f"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderHb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="274" width="182" height="20" uuid="99d26c6d-fd8f-4084-88fc-54dff6b30d8a"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderNoKartu}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="315" width="85" height="20" uuid="da508395-94b4-4b16-8a04-3e1dc6d0a5d4"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Nama		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="335" width="85" height="20" uuid="85799be7-3791-4aaa-b854-4d9ab6aa0583"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Alamat 	:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="94" y="315" width="182" height="20" uuid="8c55863c-c81c-48f4-b05b-f869eb29078c"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderNoKartu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="335" width="182" height="20" uuid="5f7c9fc5-894f-442a-a3eb-04f501b630a9"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderHb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="355" width="182" height="20" uuid="f16500eb-01bc-452b-b75e-514568e8a282"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torder_orderHb}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="355" width="85" height="20" uuid="2c4cb618-8b2f-4561-b9fa-557b59f61841"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Tanggal 	:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="396" width="182" height="20" uuid="ca237663-8def-41ef-aa8d-8210b60f944a"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Tanda tangan penerima]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="476" width="182" height="20" uuid="003c848e-67aa-4139-a90f-b37040d54d3a"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Tanda tangan dan Nama]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
